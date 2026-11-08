@@ -1,0 +1,34 @@
+{
+  "name": "Virtual PC",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "moby": false,
+      "dockerDashComposeVersion": "v2"
+    }
+  },
+  "runArgs": ["--privileged", "--device=/dev/kvm", "--device=/dev/net/tun"],
+  "capAdd": ["NET_ADMIN", "SYS_ADMIN"],
+  "forwardPorts": [8006, 3389, 6080],
+  "portsAttributes": {
+    "8006": {
+      "label": "Windows Desktop",
+      "onAutoForward": "silent",
+      "visibility": "public"
+    },
+    "3389": {
+      "label": "Windows RDP",
+      "onAutoForward": "silent",
+      "visibility": "public"
+    },
+    "6080": {
+      "label": "Linux Desktop",
+      "onAutoForward": "silent",
+      "visibility": "public"
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/install.sh",
+  "postStartCommand": "bash .devcontainer/start.sh",
+  "remoteUser": "root"
+}
