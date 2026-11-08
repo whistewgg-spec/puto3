@@ -1,0 +1,22 @@
+services:
+  linux-desktop:
+    image: lscr.io/linuxserver/webtop:ubuntu-kde
+    container_name: linux-desktop
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+      - SUBFOLDER=/
+      - TITLE=Linux Desktop
+    ports:
+      - "6080:3000"
+      - "3001:3001"
+    volumes:
+      - linux-home:/config
+    devices:
+      - /dev/dri:/dev/dri
+    shm_size: "1gb"
+    restart: unless-stopped
+
+volumes:
+  linux-home:
