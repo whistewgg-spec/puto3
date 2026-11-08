@@ -12,11 +12,8 @@ services:
       - "6080:3000"
       - "3001:3001"
     volumes:
-      - linux-home:/config
+      - /workspaces/.virtualpc/linux:/config
     devices:
       - /dev/dri:/dev/dri
     shm_size: "1gb"
     restart: unless-stopped
-
-volumes:
-  linux-home:
